@@ -20,10 +20,4 @@ class PollOption extends Model
     {
         return $this->hasMany(Vote::class);
     }
-
-    // Helper to get active votes only
-    public function activeVotes()
-    {
-        return $this->hasMany(Vote::class)->where('status', 'active');
-    }
 }

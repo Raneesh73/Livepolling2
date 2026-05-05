@@ -40,3 +40,7 @@
 4. Open Admin Panel and click **Release IP**.
 5. Vote again from Dashboard (should be allowed now).
 6. Open **View History** in Admin to verify both previous and new votes.
+
+## Notes
+- Share tunnel URL is temporary and changes each time tunnel restarts.
+- For production deployment, use a permanent domain and keep `APP_DEBUG=false`.

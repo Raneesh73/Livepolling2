@@ -18,7 +18,6 @@
                         @if ($errors->any())
                             <div class="alert alert-danger">{{ $errors->first() }}</div>
                         @endif
-
                         <form method="POST" action="{{ route('login.submit') }}">
                             @csrf
                             <div class="mb-3">

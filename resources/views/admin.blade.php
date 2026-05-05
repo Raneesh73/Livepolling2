@@ -4,7 +4,6 @@
 <div class="row">
     <div class="col-md-10 mx-auto">
         <h2 class="mb-4">Admin Dashboard - Poll Moderation</h2>
-
         <div id="admin-alert" class="alert d-none" role="alert"></div>
 
         <div class="card mb-4">
@@ -54,17 +53,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                // Group votes by IP to easily see the latest active/released state
-                                $groupedVotes = $poll->votes->groupBy('ip_address');
-                            @endphp
-
+                            @php $groupedVotes = $poll->votes->groupBy('ip_address'); @endphp
                             @foreach($groupedVotes as $ip => $votes)
-                                @php
-                                    // Get the most recent vote for display
-                                    $latestVote = $votes->sortByDesc('created_at')->first();
-                                @endphp
-                                <tr id="row_{{ $poll->id }}_{{ md5($ip) }}">
+                                @php $latestVote = $votes->sortByDesc('created_at')->first(); @endphp
+                                <tr>
                                     <td>{{ $ip }}</td>
                                     <td>{{ $latestVote->option->option_text }}</td>
                                     <td>
@@ -91,7 +83,6 @@
     </div>
 </div>
 
-<!-- History Modal -->
 <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -99,9 +90,7 @@
         <h5 class="modal-title">Vote History for IP: <span id="modal-ip"></span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="modal-history-content">
-        <!-- Loaded via AJAX -->
-      </div>
+      <div class="modal-body" id="modal-history-content"></div>
     </div>
   </div>
 </div>

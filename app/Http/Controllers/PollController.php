@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Poll;
 use App\Models\PollOption;
 use App\Models\Vote;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PollController extends Controller
@@ -54,14 +54,14 @@ class PollController extends Controller
         }
 
         $existingVote = Vote::where('poll_id', $pollId)
-                            ->where('ip_address', $ipAddress)
-                            ->where('status', 'active')
-                            ->first();
+            ->where('ip_address', $ipAddress)
+            ->where('status', 'active')
+            ->first();
 
         if ($existingVote) {
             return response()->json([
                 'success' => false,
-                'message' => 'You have already voted on this poll. Only one vote per IP is allowed.'
+                'message' => 'You have already voted on this poll. Only one vote per IP is allowed.',
             ], 403);
         }
 
@@ -74,7 +74,7 @@ class PollController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Your vote has been successfully recorded!'
+            'message' => 'Your vote has been successfully recorded!',
         ]);
     }
 
@@ -83,9 +83,9 @@ class PollController extends Controller
         $poll = Poll::findOrFail($id);
 
         $results = DB::table('poll_options')
-            ->leftJoin('votes', function($join) {
+            ->leftJoin('votes', function ($join) {
                 $join->on('poll_options.id', '=', 'votes.poll_option_id')
-                     ->where('votes.status', '=', 'active');
+                    ->where('votes.status', '=', 'active');
             })
             ->where('poll_options.poll_id', $poll->id)
             ->select('poll_options.id', 'poll_options.option_text', DB::raw('COUNT(votes.id) as vote_count'))
@@ -97,7 +97,7 @@ class PollController extends Controller
         return response()->json([
             'poll_id' => $poll->id,
             'results' => $results,
-            'total_votes' => $totalVotes
+            'total_votes' => $totalVotes,
         ]);
     }
 }

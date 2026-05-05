@@ -61,7 +61,6 @@ $(document).ready(function() {
 
                 results.forEach(function(res) {
                     let percentage = totalVotes > 0 ? Math.round((res.vote_count / totalVotes) * 100) : 0;
-                    
                     let progressBar = $('#progress_' + res.id);
                     progressBar.css('width', percentage + '%');
                     progressBar.attr('aria-valuenow', percentage);
@@ -188,7 +187,7 @@ $(document).ready(function() {
         e.preventDefault();
         let pollId = $(this).data('poll-id');
         let ipAddress = $(this).data('ip');
-        
+
         $('#modal-ip').text(ipAddress);
         $('#modal-history-content').html('<p>Loading...</p>');
         let historyModal = new bootstrap.Modal(document.getElementById('historyModal'));

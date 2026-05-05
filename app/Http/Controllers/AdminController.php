@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Poll;
 use App\Models\PollOption;
 use App\Models\Vote;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -66,7 +66,7 @@ class AdminController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'IP released successfully. They can now vote again.'
+            'message' => 'IP released successfully. They can now vote again.',
         ]);
     }
 
@@ -79,7 +79,7 @@ class AdminController extends Controller
             ->get();
 
         return response()->json([
-            'history' => $history
+            'history' => $history,
         ]);
     }
 }
